@@ -6,7 +6,7 @@ $(document).ready(function() {
         var thisVal = $(this).val();
 
         if (!isNaN(parseFloat(thisVal))) {
-            angleInput.val(parseFloat(thisVal));
+            angleInput.val(parseFloat(thisVal)).change();
         }
 
         $(this).siblings().removeClass('btn-primary').addClass('btn-default');
@@ -20,21 +20,21 @@ $(document).ready(function() {
 
     });
 
-    $('form input').change(function(e) {
+    $('form input').change(calculate);
 
-        var angleInput = $('input[name=angle]');
-        var sin = Math.sin(angleInput.val()*Math.PI/180);
-        var knifeMiddle = sin*$('input[name=knife_width]').val();
-        var knifeRadius = $('input[name=knife_strength]').val()/2;
-
-        $('#distanceTop'   ).html(Math.round((knifeMiddle+knifeRadius)*10)/10 + ' mm');
-        $('#distanceMiddle').html(Math.round((knifeMiddle            )*10)/10 + ' mm');
-        $('#distanceBottom').html(Math.round((knifeMiddle-knifeRadius)*10)/10 + ' mm');
-
-        console.log();
-
-    });
-
+    calculate();
 
 });
 
+function calculate() {
+
+    var angleInput = $('input[name=angle]');
+    var sin = Math.sin(angleInput.val()*Math.PI/180);
+    var knifeMiddle = sin*$('input[name=knife_width]').val();
+    var knifeRadius = $('input[name=knife_strength]').val()/2;
+
+    $('#distanceTop'   ).html(Math.round((knifeMiddle+knifeRadius)*10)/10 + ' mm');
+    $('#distanceMiddle').html(Math.round((knifeMiddle            )*10)/10 + ' mm');
+    $('#distanceBottom').html(Math.round((knifeMiddle-knifeRadius)*10)/10 + ' mm');
+
+}
