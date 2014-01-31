@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $('#angle-group button').click(function(e) {
+    $('#angleSelect').change(function() {
 
         var angleInput = $('input[name=angle]');
         var thisVal = $(this).val();
@@ -8,9 +8,6 @@ $(document).ready(function() {
         if (!isNaN(parseFloat(thisVal))) {
             angleInput.val(parseFloat(thisVal)).change();
         }
-
-        $(this).siblings().removeClass('btn-primary').addClass('btn-default');
-        $(this).addClass('btn-primary');
 
         if ($(this).val() == 'custom') {
             angleInput.show();
@@ -29,7 +26,7 @@ $(document).ready(function() {
 function calculate() {
 
     var angleInput = $('input[name=angle]');
-    var sin = Math.sin(angleInput.val()*Math.PI/180);
+    var sin = Math.sin(angleInput.val()/2*Math.PI/180);
     var knifeMiddle = sin*$('input[name=knife_width]').val();
     var knifeRadius = $('input[name=knife_strength]').val()/2;
 
